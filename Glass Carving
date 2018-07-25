@@ -1,0 +1,80 @@
+WA的代码
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
+
+int main()
+{
+    int x,y,time,number;
+    int kindx,kindy;
+    int maxx,maxy;
+    char option;
+    cin>>x>>y>>time;
+    bool a[x+1],b[y+1];
+    int distancex[x],distancey[y];
+    memset(a,0,sizeof(a));
+    memset(b,0,sizeof(b));
+    maxx=x;
+    maxy=y;
+    for(int i=0; i<time; i++)
+    {
+        cin>>option;
+        if(option=='H')
+        {
+            kindy=0;
+            memset(distancey,0,sizeof(distancey));
+            maxy=0;
+            cin>>number;
+            b[number]=1;
+            for(int j=0; j<y; j++)
+            {
+                if(!b[j])
+                {
+                    distancey[kindy]++;
+                }
+                else
+                {
+                    kindy++;
+                    distancey[kindy]++;
+                }
+            }
+            for(int j=0; j<=kindy; j++)
+            {
+                if(distancey[j]>maxy)
+                {
+                    maxy=distancey[j];
+                }
+            }
+        }
+        else if(option=='V')
+        {
+            kindx=0;
+            memset(distancex,0,sizeof(distancex));
+            maxx=0;
+            cin>>number;
+            a[number]=1;
+            for(int j=0; j<x+1; j++)
+            {
+                if(!a[j])
+                {
+                    distancex[kindx]++;
+                }
+                else
+                {
+                    kindx++;
+                    distancex[kindx]++;
+                }
+            }
+            for(int j=0; j<=kindx; j++)
+            {
+                if(distancex[j]>maxx)
+                {
+                    maxx=distancex[j];
+                }
+            }
+        }
+        cout<<maxx*maxy<<endl;
+    }
+    return 0;
+}
