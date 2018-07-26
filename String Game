@@ -1,0 +1,66 @@
+WA
+调试结果：flag一直为0，感觉新数列和第二个数列匹配对比存在问题
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstdio>
+using namespace std;
+int main()
+{
+    string s,t;
+    string tem;
+    int op[100];
+    cin>>t>>s;
+    int sum=0;
+    int  flag=1;
+    int k=0;
+    char ch;
+    for(int i=0;i<100;i++)
+    {
+        cin>>op[i];
+        ch=getchar();
+        if(ch=='\n')
+        {
+            break;
+        }
+    }
+    while(flag)
+    {
+        k=0;
+        t[op[sum]-1]='1';
+        for(int i=0; i<t.length(); i++)
+        {
+            if(t[i]>='a'&&t[i]<='z')
+               {
+                  tem[k]=t[i];
+                  k++;
+               }
+
+        }
+        for(int i=0; i<s.length()&&flag&&s.length()<=k; i++)
+        {
+            for(int j=i; j<k; j++)
+            {
+                if(s[i]==tem[j])
+                {
+                    flag=1;
+                    break;
+                }
+                else
+                {
+                    flag=0;
+                }
+            }
+        }
+            if(flag)
+            {
+                sum++;
+            }
+            else if(!flag)
+            {
+                cout<<sum<<endl;
+                break;
+            }
+    }
+    return 0;
+}
