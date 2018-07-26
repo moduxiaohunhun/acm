@@ -1,0 +1,71 @@
+WA:除了第一组数据外都不能正常测试，心态炸裂
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstdio>
+#include <algorithm>
+#include <vector>
+using namespace std;
+char picture[50][50];
+int sumup=0,sumdown=0,sumleft=0,sumright=0;
+char ch='\0';
+int number;
+void dfs(int i,int j)
+{
+    ch=picture[i][j];
+    //picture[i][j]='.';
+    if(j<number-1&&i>0&&i<number-1&&picture[i][j+1]==ch&&picture[i-1][j+1]!=ch&&picture[i+1][j+1]!=ch)
+    {
+        sumright++;
+        dfs(i,j+1);
+
+    }
+    if(j>0&&i>0&&i<number-1&&picture[i][j-1]==ch&&picture[i-1][j-1]!=ch&&picture[i+1][j-1]!=ch)
+    {
+        sumleft++;
+        dfs(i,j-1);
+    }
+    if(i>0&&j>0&&j<number-1&&picture[i-1][j]==ch&&picture[i-1][j+1]!=ch&&picture[i-1][j-1]!=ch)
+    {
+        sumup++;
+        dfs(i-1,j);
+    }
+    if(i<number-1&&j>0&&j<number-1&&picture[i+1][j]==ch&&picture[i+1][j-1]!=ch&&picture[i+1][j+1]!=ch)
+    {
+        sumdown++;
+        dfs(i+1,j);
+    }
+    return;
+}
+int main()
+{
+    int sum;
+    while(cin>>number&&number!=0)
+    {
+        sum=0;
+        for(int i=0; i<number; i++)
+        {
+            for(int j=0; j<number; j++)
+            {
+                cin>>picture[i][j];
+            }
+        }
+        for(int i=1; i<number-1; i++)
+        {
+            for(int j=1; j<number-1; j++)
+            {
+                if(picture[i][j]=='#'&&picture[i-1][j]=='#'&&picture[i+1][j]=='#'&&picture[i][j+1]=='#'&&picture[i][j-1]=='#')
+                {
+                    dfs(i,j);
+                    if(sumdown==sumup&&sumleft==sumright&&sumdown==sumleft&&sumup!=0)
+                    {
+                        sum++;
+                    }
+                     sumdown=sumup=sumleft=sumright=0;
+                }
+            }
+        }
+        cout<<sum<<endl;
+    }
+    return 0;
+}
