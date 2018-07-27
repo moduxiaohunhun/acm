@@ -27,7 +27,7 @@ int main()
     int p=0,flag=0;
     memset(money,0,sum);
     int j=0;
-    ********************************************************************
+    *******************
     error
     ********************************************************************
     for(int k=0;k<sum;k++)                                                
@@ -47,7 +47,7 @@ int main()
     }
     **********************************************************************
     error
-    **********************************************************************
+    ********************
     int temp1=0,temp2=0;
     for(int i=0;i<p;i++)
     {
@@ -69,5 +69,70 @@ int main()
             j++;
         }
     }
+    return 0;
+}
+
+
+
+
+**********************************************************************************
+**********************************************************************************
+终于AC啦啦啦啦啦
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+int pile[1000000],penalty[1000000],money[2000002];
+int main()
+{
+    int num;
+    while(scanf("%d",&num)!=EOF)
+    {
+        for(int i=0; i<num; i++)
+        {
+            scanf("%d",&pile[i]);
+        }
+        for(int i=0; i<num; i++)
+        {
+            scanf("%d",&penalty[i]);
+        }
+        for(int i=0; i<num; i++)
+        {
+            money[i]=pile[i]-penalty[i];
+        }
+        for(int i=num; i<2*num; i++)
+        {
+            money[i]=money[i-num];
+        }
+        money[2*num]='\0';
+        int flag=0;
+        int j=0;
+        for(int i=0; i<num&&j-i!=num; i++)
+        {
+            if(money[i]>=0&&j-i!=num)
+            {
+                flag=0;
+                j=i;
+                while(flag>=0&&j-i!=num)
+                {
+                    flag+=money[j];
+                    j++;
+                }
+                if(j-i==num)
+                {
+                    cout<<i<<endl;
+                    break;
+                }
+                else
+                {
+                    i=j-1;
+                }
+
+            }
+
+        }
+    }
+
     return 0;
 }
