@@ -1,0 +1,73 @@
+虽然没有运行出任何结果，但是自我感觉有所提升，昨天连运行都不行
+经电脑和人脑的双重debug后，基本锁定问题是出现在某一段上
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+
+int main()
+{
+    int pile[10000],penalty[10000];
+    int money[10000];
+    int sum;
+    cin>>sum;
+    for(int i=0;i<sum;i++)
+    {
+        cin>>pile[i];
+    }
+    for(int i=0;i<sum;i++)
+    {
+        cin>>penalty[i];
+    }
+    for(int i=0;i<sum;i++)
+    {
+        penalty[i]=pile[i]-penalty[i];
+    }
+    int p=0,flag=0;
+    memset(money,0,sum);
+    int j=0;
+    ********************************************************************
+    error
+    ********************************************************************
+    for(int k=0;k<sum;k++)                                                
+    {
+        if(penalty[k]>=0)
+        {
+            j=k;
+            flag=0;
+            while(flag>=0)
+            {
+                money[p]+=pile[j%sum];
+                flag+=penalty[j%sum];
+                j++;
+            }
+            p++;
+        }
+    }
+    **********************************************************************
+    error
+    **********************************************************************
+    int temp1=0,temp2=0;
+    for(int i=0;i<p;i++)
+    {
+        if(money[i]>temp1)
+        {
+            temp1=money[i];
+            temp2=i;
+        }
+    }
+    for(int i=0,j=0;i<sum;i++)
+    {
+        if(j==temp2)
+        {
+            cout<<i<<endl;
+            break;
+        }
+        if(penalty[i]>=0)
+        {
+            j++;
+        }
+    }
+    return 0;
+}
