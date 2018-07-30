@@ -10,7 +10,7 @@ int main()
     while(scanf("%d%d",&peoplenum,&moneynum)!=EOF&&peoplenum!=0&&moneynum!=0)
     {
         int people[peoplenum];
-        int money[moneynum];
+        int money[moneynum];                //错误就在于此，初始化方式错误改为memset(people,0,sizeof(people))
         memset(people,0,peoplenum);
         for(int i=0;i<moneynum;i++)
         {
