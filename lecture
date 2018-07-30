@@ -1,4 +1,4 @@
-问题：c[i]里面只存了a[i]，。。。。。。。//问题已经解决
+问题：c[i]里面只存了a[i]，。。。。。。。//问题已经解决，参见lecture2，使用map，代码更加简洁
 #include <iostream>
 #include <cstdio>
 #include <string>
