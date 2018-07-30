@@ -1,0 +1,41 @@
+能运行，能出结果就是出的结果是不对的，唉唉唉唉，还算机器给了点面子，继续思考.ing
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+int main()
+{
+    int peoplenum,moneynum;
+    while(scanf("%d%d",&peoplenum,&moneynum)!=EOF&&peoplenum!=0&&moneynum!=0)
+    {
+        int people[peoplenum];
+        int money[moneynum];                //错误就在于此，初始化方式错误改为memset(people,0,sizeof(people))
+        memset(people,0,peoplenum);
+        for(int i=0;i<moneynum;i++)
+        {
+            money[i]=i+1;
+        }
+        int flag=0,temp=0,num=peoplenum;
+        *************************************************************************************************************************
+        for(int i=0,j=0;num>0;)
+        {
+            if(flag==0)
+            {
+                flag=money[j%moneynum];
+                j++;
+            }
+            temp=min(40-people[i%peoplenum],flag);
+            people[i%peoplenum]+=temp;
+            flag-=temp;
+            if(people[i%peoplenum]==40&&temp!=0)
+            {
+                cout<<i%peoplenum+1<<endl;
+                num--;
+            }
+            i++;
+        }
+        ***************************************************************************************************************************
+    }
+    return 0;
+}
