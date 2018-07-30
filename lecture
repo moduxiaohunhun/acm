@@ -1,4 +1,4 @@
-问题：c[i]里面只存了a[i]，。。。。。。。
+问题：c[i]里面只存了a[i]，。。。。。。。//问题已经解决
 #include <iostream>
 #include <cstdio>
 #include <string>
@@ -35,6 +35,7 @@ int main()
     {
         for(int i=0; i<wordnum; i++)
         {
+       *************************************************error:改为a[i]==d[i],再改一下输出格式就OK了
             if(c[i]==d[j])
             {
                 cout<<c[i]<<" ";
