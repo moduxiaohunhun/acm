@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <cstring>
+#include <map>
+using namespace std;
+
+int main()
+{
+    map<string,string> findyou;
+    int essaynum,wordnum;
+    while(scanf("%d%d",&essaynum,&wordnum)!=EOF)
+    {
+        for(int i=0; i<wordnum; i++)
+        {
+            string a;
+            string b;
+            cin>>a>>b;
+            if(a.size()<=b.size())
+            {
+                findyou[a]=a;
+                findyou[b]=a;
+            }
+            else
+            {
+                findyou[a]=b;
+                findyou[b]=b;
+            }
+        }
+        for(int j=0; j<essaynum; j++)
+        {
+            string a;
+            cin>>a;
+            if(j!=essaynum-1)
+            {
+                cout<<findyou[a]<<" ";
+            }
+            else
+                cout<<findyou[a]<<endl;
+        }
+    }
+
+    return 0;
+}
