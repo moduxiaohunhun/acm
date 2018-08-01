@@ -1,0 +1,33 @@
+终于AC了，运用pair< , >.......记住
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+#include <string>
+using namespace std;
+pair <int,int> number[1000];
+string flag;
+int main()
+{
+    int k=0;
+    int sum=0;
+    while(cin>>flag&&flag!="#")
+    {
+        cin>>number[k].first>>number[k].second;
+        k++;
+    }
+    cin>>sum;
+    sort(number,number+k);
+    for(int i=1; sum>0; i++)
+    {
+        for(int j=0; j<k; j++)
+        {
+            if(i%number[j].second==0)
+            {
+                cout<<number[j].first<<endl;
+                sum--;
+            }
+        }
+    }
+    return 0;
+}
