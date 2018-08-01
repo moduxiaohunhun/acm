@@ -1,4 +1,4 @@
-问题：不输出任何结果，一秒后直接结束。。。。。。。。难受.jpg
+第一次：问题：不输出任何结果，一秒后直接结束。。。。。。。。难受.jpg
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
@@ -54,5 +54,90 @@ int main()
         time++;
     }
     cout<<time<<","<<endl;
+    return 0;
+}
+
+
+***************************************************************************************
+第二次：WA，测试样例全部通过。。。。。。。。
+#include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <cstring>
+using namespace std;
+char area[13][4][3];
+int sum[13];
+bool flag=1;
+int main()
+{
+    while(flag)
+    {
+        char ch='\0';
+        for(int i=0; i<13; i++)sum[i]=4;
+        for(int i=0; i<4; i++)
+        {
+            for(int j=12; j>=0; j--)
+            {
+                cin>>area[j][i][0];
+                if(area[j][i][0]=='#')
+                {
+                    flag=0;
+                    exit(0);
+                }
+                cin>>area[j][i][1];
+                area[j][i][2]='\0';
+            }
+        }
+        ch=area[12][0][0];
+        int k=12;
+        int time=0;
+        sum[12]=3;
+        char special='\0';
+        char special2='\0';
+        while(sum[12]>=0)
+        {
+            if(ch>='0'&&ch<='9')
+            {
+                k=ch-'0'-1;
+            }
+            else if(ch=='A')
+            {
+                k=0;
+            }
+            else if(ch=='T')
+            {
+                k=9;
+            }
+            else if(ch=='J')
+            {
+                k=10;
+            }
+            else if(ch=='Q')
+            {
+                k=11;
+            }
+            else if(ch=='K')
+            {
+                k=12;
+            }
+            int b=4-sum[k];
+            ch=area[k][b][0];
+            sum[k]--;
+            if(sum[k]==0)
+            {
+                special=ch;
+                special2=area[k][b][1];
+            }
+            time++;
+        }
+        if(time>9)
+        {
+            cout<<time<<","<<special<<special2<<endl;
+        }
+        if(time<=9)
+        {
+            cout<<"0"<<time<<","<<special<<special2<<endl;
+        }
+    }
     return 0;
 }
