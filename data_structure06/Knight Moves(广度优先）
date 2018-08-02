@@ -1,0 +1,92 @@
+WA：绝望+10000，运行结果不正确，debug后发现第二个while，出来的时候居然不满足判断条件。。。。。。
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <queue>
+using namespace std;
+int main()
+{
+    char cx1,cx2;
+    int x1,y1,x2,y2;
+    int sum;
+    int step;
+    while(cin>>cx1>>y1>>cx2>>y2)
+    {
+        sum=0;
+        step=0;
+        x1=cx1-'a',x2=cx2-'a';
+        y1--,y2--;
+        queue <pair<int,int> > q1;
+        pair<int,int> poem;
+        pair<int,int> poem2;
+        poem.first=x1;
+        poem.second=y1;
+        q1.push(poem);
+        sum=q1.size();
+        poem=q1.front();
+        while(poem.first!=x2&&poem.second!=y2)
+        {
+            if(poem.first-2>=0&&poem.second+1<=7)
+            {
+                poem2.first=poem.first-2;
+                poem2.second=poem.second+1;
+                q1.push(poem2);
+            }
+            if(poem.first-1>=0&&poem.second+2<=7)
+            {
+                poem2.first=poem.first-1;
+                poem2.second=poem.second+2;
+                q1.push(poem2);
+            }
+            if(poem.first+2<=7&&poem.second+1<=7)
+            {
+                poem2.first=poem.first+2;
+                poem2.second=poem.second+1;
+                q1.push(poem2);
+            }
+            if(poem.first+1<=7&&poem.second+2<=7)
+            {
+                poem2.first=poem.first+1;
+                poem2.second=poem.second+2;
+                q1.push(poem2);
+            }
+            if(poem.first-1>=0&&poem.second-2>=0)
+            {
+                poem2.first=poem.first-1;
+                poem2.second=poem.second-2;
+                q1.push(poem2);
+            }
+            if(poem.first-2>=0&&poem.second-1>=0)
+            {
+                poem2.first=poem.first-2;
+                poem2.second=poem.second-1;
+                q1.push(poem2);
+            }
+            if(poem.first+1<=7&&poem.second-2>=0)
+            {
+                poem2.first=poem.first+1;
+                poem2.second=poem.second-2;
+                q1.push(poem2);
+            }
+            if(poem.first+2<=7&&poem.second-1>=0)
+            {
+                poem2.first=poem.first+2;
+                poem2.second=poem.second-1;
+                q1.push(poem2);
+            }
+            q1.pop();
+            sum--;
+            if(sum==0)
+            {
+                step++;
+                sum=q1.size();
+            }
+            poem=q1.front();
+        }
+        cout<<step<<endl;
+    }
+    return 0;
+}
