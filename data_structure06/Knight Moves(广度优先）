@@ -92,4 +92,69 @@ int main()
 }
 
 
+AC源码；bfs,queue,struct
+#include <iostream>
+#include <cstdio>
+#include <queue>
+#include <cstring>
+#include <string>
+using namespace std;
+int area[10][10];
+int direction[8][2]={{1,-2},{2,-1},{2,1},{1,2},{-1,2},{-2,1},{-2,-1},{-1,-2}};
+struct node
+{
+    int x;
+    int y;
+    int step;
+};
+
+int main()
+{
+   int endx,endy;
+   char start[3],end[3];
+   while(~scanf("%s%s",start,end))
+   {
+       memset(area,0,sizeof(area));
+       endx=end[0]-'a';
+       endy=end[1]-'1';
+       struct node n;
+       n.x=start[0]-'a';
+       n.y=start[1]-'1';
+       n.step=0;
+       area[n.x][n.y]=0;
+       queue <node> q;
+       q.push(n);
+       while(!q.empty())
+       {
+           node n=q.front();
+           q.pop();
+           if(n.x==endx&&n.y==endy)
+           {
+               printf("To get from %s to %s takes %d knight moves.\n",start,end,n.step);
+               break;
+           }
+          for(int i=0;i<8;i++)
+          {
+              struct node secondn;
+              secondn.x=n.x+direction[i][0];
+              secondn.y=n.y+direction[i][1];
+              if(secondn.x<0||secondn.y>=8||secondn.x>=8||secondn.y<0||area[secondn.x][secondn.y]!=0)
+              {
+                  continue;
+              }
+              else
+              {
+                  secondn.step=n.step+1;
+                  area[secondn.x][secondn.y]=secondn.step;
+                  q.push(secondn);
+              }
+          }
+       }
+       while(q.empty())
+       {
+           q.pop();
+       }
+   }
+    return 0;
+}
 
