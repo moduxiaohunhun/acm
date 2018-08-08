@@ -1,0 +1,78 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+using namespace std;
+const int number=998244353;
+int sum1[100002],sum2[100002];
+long long sum;
+long long Mode(long long int a,int b)
+{
+    sum=1;
+    a=a%number;
+    while(b>0)
+    {
+        if(b%2==1)
+        {
+            sum=(sum*a)%number;
+        }
+        b/=2;
+        a=(a*a)%number;
+    }
+    return sum;
+}
+int main()
+{
+    int num,len,time;
+    scanf("%d",&num);
+    int l,r,op;
+    long long int ret1,ret2,ret;
+
+    while(num--)
+    {
+        memset(sum1,0,sizeof(sum1));
+        memset(sum2,0,sizeof(sum2));
+        sum=1;
+        scanf("%d%d",&len,&time);
+        ret1=1,ret2=1,ret=1;
+        while(time--)
+        {
+            scanf("%d%d%d",&l,&r,&op);
+            if(op==2)
+            {
+               sum1[l-1]++;
+               sum1[r]--;
+            }
+            if(op==3)
+            {
+               sum2[l-1]++;
+               sum2[r]--;
+            }
+        }
+        for(int i=1;i<len;i++)
+        {
+            sum1[i]=sum1[i-1]+sum1[i];
+            sum2[i]=sum2[i-1]+sum2[i];
+        }
+        int temp1=sum1[0],temp2=sum2[0];
+        for(int i=0; i<len; i++)
+        {
+            if(sum1[i]<temp1)
+            {
+                temp1=sum1[i];
+            }
+            if(sum2[i]<temp2)
+            {
+                temp2=sum2[i];
+            }
+        }
+        ret1=Mode(2,temp1);
+        ret2=Mode(3,temp2);
+        ret=((ret1%number)*(ret2%number))%number;
+        printf("%lld\n",ret);
+    }
+    return 0;
+}
+
