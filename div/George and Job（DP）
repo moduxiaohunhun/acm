@@ -1,0 +1,105 @@
+TLE：伤心
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+using namespace std;
+int line[5005];
+int number[5005];
+int dp[5005][5005];
+int num,m,k;
+int rec(int i,int j)
+{
+    if(dp[i][j]>=0)
+    {
+        return dp[i][j];
+    }
+    int res;
+    if(i<0||i>num-m||j<=0) res=0;
+    else if(j<1)
+    {
+        res=rec(i+m,j);
+    }
+    else
+    {
+        res=max(rec(i+1,j),rec(i+m,j-1)+number[i]);
+    }
+    return dp[i][j]=res;
+}
+int main()
+{
+
+    //int sum=0;
+    scanf("%d%d%d",&num,&m,&k);
+    for(int i=0; i<num; i++)
+    {
+        scanf("%d",&line[i]);
+    }
+    memset(number,0,sizeof(number));
+    for(int i=0;i<=num-m;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            number[i]+=line[i+j];
+        }
+    }
+    memset(dp,-1,sizeof(dp));
+    printf("%d\n",rec(0,k));
+    return 0;
+}
+
+
+
+AC啦啦啦啦
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+using namespace std;
+long long int line[5005];
+long long int number[5005];
+long long int dp[5005][5005];
+int num,m,k;
+
+int main()
+{
+
+    //int sum=0;
+    scanf("%d%d%d",&num,&m,&k);
+    for(int i=0; i<num; i++)
+    {
+        scanf("%lld",&line[i]);
+    }
+    memset(number,0,sizeof(number));
+    for(int i=0;i<=num-m;i++)
+    {
+        for(int j=0;j<m;j++)
+        {
+            number[i]+=line[i+j];
+        }
+    }
+    memset(dp,0,sizeof(dp));
+    for(int i=num-m;i>=0;i--)
+    {
+        for(int j=0;j<=k;j++)
+        {
+            if(j<1)
+            {
+                dp[i][j]=dp[i+1][j];
+            }
+            else
+            {
+                dp[i][j]=max(dp[i+1][j],dp[i+m][j-1]+number[i]);
+            }
+        }
+    }
+    printf("%lld\n",dp[0][k]);
+    return 0;
+}
+
