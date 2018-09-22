@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <vector>
+#include <stack>
+#include <queue>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+
+using namespace std;
+int a[1000005];
+int b[1000005];
+long long tem[2000005];
+
+int main() {
+	int T;
+	cin >> T;
+	while (T--) {
+		int c, n;
+		scanf("%d%d", &n, &c);
+		for (int i = 0; i < n; i++) {
+			scanf("%d", &a[i]);
+		}
+		for (int i = 0; i < n; i++) {
+			scanf("%d", &b[i]);
+		}
+		for (int i = 0; i < n; i++) {
+			tem[i] = tem[i + n] = a[i] - b[i];
+		}
+		long long sum = c;
+		bool flag = 1;
+		int start = 0;
+		for (int i = 0; i < n; i++) {
+			if (sum + tem[i] >= 0) {
+				start = i;
+				break;
+			}
+		}
+		int i = start;
+		while (i < n + n) {
+			sum += tem[i];
+			if (sum < 0) {
+				for (int j = start; j <= i; j++) {
+					sum -= tem[j];
+					if (sum >= 0) {
+						start = j + 1;
+						break;
+					}
+				}
+				if (start >= n) {
+					flag = 0;
+					break;
+				}
+			}
+			if (i - start + 1 == n)
+				break;
+			i++;
+		}
+		if (flag) {
+			printf("%d\n", start + 1);
+		}
+		else
+			printf("-1\n");
+	}
+	return 0;
+}
