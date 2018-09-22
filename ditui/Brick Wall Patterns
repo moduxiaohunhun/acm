@@ -1,0 +1,33 @@
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <map>
+#include <queue>
+#include <vector>
+#include <set>
+using namespace std;
+ 
+int main()
+{
+    long long int  num;
+    long long int a[55];
+    while(cin>>num)
+    {
+        memset(a,0,sizeof(a));
+       if(num==0)
+       {
+           return 0;
+       }
+       a[0]=1;
+       a[1]=2;
+       for(int i=2;i<55;i++)
+       {
+           a[i]=a[i-1]+a[i-2];
+       }
+       cout<<a[num-1]<<endl;
+    }
+    return 0;
+}
