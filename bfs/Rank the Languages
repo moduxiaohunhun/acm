@@ -1,0 +1,102 @@
+***********************************************************
+千万不要加else if 在bfs里面，因为要走遍上下左右四个方向
+***********************************************************
+#include <iostream>
+#include <stdio.h>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <map>
+#include <queue>
+#include <vector>
+#include <set>
+using namespace std;
+char area[1000][1000];
+int letter[30];
+int number[30];
+int line,column;
+char ch='\0';
+void dfs(int x,int y)
+{
+    ch=area[x][y];
+    area[x][y]='.';
+    if(area[x+1][y]==ch&&x<line-1&&x>=0)
+    {
+        dfs(x+1,y);
+    }
+     if(area[x-1][y]==ch&&x>0&&x<=line-1)
+    {
+        dfs(x-1,y);
+    }
+     if(area[x][y-1]==ch&&x>=0&&x<=line-1&&y>0&&y<column)
+    {
+        dfs(x,y-1);
+    }
+     if(area[x][y+1]==ch&&x>=0&&x<=line-1&&y>=0&&y<column-1)
+    {
+        dfs(x,y+1);
+    }
+}
+/*bool cmp(int a,int b)
+{
+    if(a>b) return 1;
+    else return 0;
+}*/
+int main()
+{
+    int time;
+    cin>>time;
+    for(int k=1;k<=time;k++)
+    {
+        int max=0;
+        memset(letter,0,sizeof(letter));
+        memset(number,0,sizeof(number));
+        cin>>line>>column;
+        for(int i=0;i<line;i++)
+        {
+            for(int j=0;j<column;j++)
+            {
+                cin>>area[i][j];
+            }
+        }
+        for(int i=0;i<line;i++)
+        {
+            for(int j=0;j<column;j++)
+            {
+                if(area[i][j]>='a'&&area[i][j]<='z')
+                {
+                    letter[area[i][j]-'a']++;
+
+                    dfs(i,j);
+                }
+            }
+        }
+        /*for(int i=0;i<26;i++)
+        {
+            number[i]=letter[i];
+        }
+        sort(number,number+30,cmp);*/
+        cout<<"World #"<<k<<endl;
+         while(1)
+        {
+            for(int i=0;i<26;i++)
+            {
+                if(letter[i]>max)
+                {
+                    max=letter[i];
+                    ch=i+'a';
+                }
+            }
+            if(max==0)
+                break;
+            else
+            {
+                cout<<ch<<": "<<max<<endl;
+                letter[ch-'a']=0;
+                max=0;
+            }
+        }
+    }
+    return 0;
+}
